@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
+   
+    <!-- Include Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0ovgCKqluu8EYXeE_tdqwDxDP2w1u4cM",
+            authDomain: "mockinbird-4f32f.firebaseapp.com",
+            projectId: "mockinbird-4f32f",
+            storageBucket: "mockinbird-4f32f.appspot.com",
+            messagingSenderId: "917272763555",
+            appId: "1:917272763555:web:54afb2ba944514a1433316"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Google Sign-In Function
+        window.googleSignIn = function () {
+            const provider = new GoogleAuthProvider();
+            console.log("Initiating Google Sign-In...");
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    console.log("Sign-In Successful!", result);
+                    return result.user.getIdToken();
+                })
+                .then((idToken) => {
+                    console.log("ID Token received:", idToken);
+                    return fetch('/verify_google_token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ token: idToken })
+                    });
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        console.log("Token verified, redirecting to events...");
+                        window.location.href = '/events';  // Redirect to events page
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during Google Sign-In: ", error);
+                });
+        }
+
+        // Handle Form Submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            console.log("Username:", username);
+            console.log("Password:", password);
+            // Add your authentication logic here
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sign In</h1>
+        <form onsubmit="handleFormSubmit(event)">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Sign In</button>
+            <button type="button" onclick="googleSignIn()">Sign in with Google</button>
+        </form>
+        <a href="/register" class="register-link">New user? Register here</a>
+    </div>
+</body>
+
+</html>

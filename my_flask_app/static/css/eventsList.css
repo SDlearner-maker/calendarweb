@@ -1,0 +1,124 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Modern font */
+    background-color: #f0f4f8; /* Soft background color */
+    color: #333; /* Darker text for contrast */
+    margin: 0;
+    padding: 20px; /* Padding for body */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+h1 {
+    text-align: center; /* Center align the title */
+    font-size: 2.5em; /* Larger font size */
+    margin-bottom: 20px; /* Margin below title */
+    color: #4285F4; /* Google blue color */
+    margin-top: 40px; /* Increased top margin */
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto; /* Allow horizontal scrolling */
+}
+
+table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Remove gaps between cells */
+    margin-top: 20px; /* Space above table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Prevents border-radius from being cut off */
+}
+
+thead {
+    background-color: #4285F4; /* Header background color */
+    color: white; /* Header text color */
+}
+
+th,
+td {
+    padding: 12px; /* Padding in cells */
+    text-align: left; /* Left align text */
+    border-bottom: 1px solid #ddd; /* Light border for separation */
+    word-wrap: break-word; /* Allow words to break */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+tr:first-child:hover {
+    background-color: inherit; /* Prevent hover effect on the first row */
+}
+
+/* Button Styles within the table */
+button {
+    background-color: #e84118; /* Red for delete */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 8px 12px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+    margin-right: 5px; /* Space between buttons */
+    width: auto; /* Auto width for buttons */
+}
+
+button:hover {
+    background-color: #7b0710; /* Darker red on hover */
+}
+
+/* Add New Event Button Styles */
+.add-event-button {
+    display: block; /* Block display for center alignment */
+    margin: 20px auto; /* Center align button and space above */
+    background-color: #34A853; /* Green for add button */
+    color: white; /* White text */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px; /* Padding for buttons */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition */
+    width: 150px; /* Fixed width */
+    text-align: center; /* Center text */
+}
+
+.add-event-button:hover {
+    background-color: #03380f; /* Darker green on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em; /* Smaller title on mobile */
+    }
+    
+    th,
+    td {
+        font-size: 14px; /* Smaller font size for table */
+        padding: 10px; /* Reduce padding */
+    }
+
+    button {
+        width: auto; /* Auto width for buttons on mobile */
+        margin-top: 5px; /* Space between buttons */
+    }
+
+    .add-event-button {
+        width: 150px; /* Fixed width on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em; /* Smaller title for very small screens */
+    }
+
+    th,
+    td {
+        font-size: 12px; /* Even smaller font size for small devices */
+    }
+
+    .add-event-button {
+        width: 120px; /* Further reduced width for very small screens */
+    }
+}

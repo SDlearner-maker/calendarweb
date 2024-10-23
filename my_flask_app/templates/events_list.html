@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}"> <!-- Link to navbar styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/eventsList.css') }}"> <!-- Link to main body -->
+    <title>Event List</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <form action="{{ url_for('events_list') }}" method="get">
+            <button type="submit">Home</button>
+        </form>
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <h1>Your Events</h1>
+
+    <div class="table-container"> <!-- Added div wrapper -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Receiver Email</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if events %}
+                    {% for index, event in events.items() %}
+                        <tr>
+                            <td>{{ event['title'] }}</td>
+                            <td>{{ event['description'] }}</td>
+                            <td>{{ event['receiverMail'] }}</td>
+                            <td>{{ event['date'] }}</td>
+                            <td>{{ event['time'] }}</td>
+                            <td>
+                                <form action="{{ url_for('delete_event', event_index=index) }}" method="POST" style="display: inline;">
+                                    <button type="submit">Delete</button>
+                                </form>
+                                <form action="{{ url_for('update_event', event_index=index) }}" style="display: inline;">
+                                    <button>Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">No events found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('event_form') }}" class="add-event-button">Add New Event</a>
+</body>
+
+</html>

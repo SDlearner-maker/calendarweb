@@ -1,0 +1,55 @@
+/* Navbar Styles */
+.navbar {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center; /* Center items vertically */
+    background-color: #34A853; /* Green background color */
+    padding: 10px; /* Adjusted padding for a better look */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow */
+    gap: 10px; /* Gap between buttons */
+    flex-wrap: nowrap; /* No wrapping by default */
+}
+
+.navbar form {
+    margin: 0; /* Remove margin */
+}
+
+.navbar button {
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    padding: 10px 20px; /* Adjusted padding for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    transition: background-color 0.3s; /* Smooth transition */
+    border: none; /* Remove default border */
+    background-color: #4285F4; /* Button background */
+    cursor: pointer; /* Pointer cursor */
+    width: auto; /* Auto width to fit content */
+    text-align: center; /* Center text */
+}
+
+.navbar button:hover {
+    background-color: rgb(23, 74, 192); /* Darker blue on hover */
+}
+
+/* Responsive Styles for Navbar */
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center the stacked buttons */
+        gap: 10px; /* Add space between stacked buttons */
+        padding: 10px; /* Adjust padding */
+    }
+
+    .navbar form {
+        width: 100%; /* Full width for forms on small screens */
+        display: flex;
+        justify-content: center;
+    }
+
+    .navbar button {
+        width: 100%; /* Full width for buttons to stack well */
+        padding: 10px; /* Keep padding consistent */
+        font-size: 14px; /* Slightly smaller font size for mobile */
+    }
+}

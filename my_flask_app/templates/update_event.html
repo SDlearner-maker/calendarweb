@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Event</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/updateEvent.css') }}">    
+</head>
+<body>
+    <div class="navbar">
+        <form action="{{ url_for('events_list') }}" method="get">
+            <button type="submit">Home</button>
+        </form>
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h1>Update Event</h1>
+        <form action="{{ url_for('update_event', event_index=event_index) }}" method="post">
+            <label for="title">Event Title:</label>
+            <input type="text" id="title" name="title" value="{{ event.title }}" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required>{{ event.description }}</textarea>
+
+            <label for="receiverMail">Receiver Email:</label>
+            <input type="email" id="receiverMail" name="receiverMail" value="{{ event.receiverMail }}" disabled>
+
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date" value="{{ event.date }}" min="{{ current_date }}" required>
+
+            <label for="time">Event Time:</label>
+            <input type="time" id="time" name="time" value="{{ event.time }}" required>
+
+            <p id="current-datetime"></p>
+
+            <input type="submit" value="Update Event">
+        </form>
+    </div>
+
+    <script>
+        // Get the current date and time
+        const now = new Date();
+        
+        // Format date to YYYY-MM-DD using local methods
+        const currentDate = now.getFullYear() + '-' +
+                            String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                            String(now.getDate()).padStart(2, '0');
+
+        // Set the minimum date to tomorrow's date in local time
+        const tomorrow = new Date(now);       
+        tomorrow.setDate(now.getDate() + 1);
+        const minDate = tomorrow.getFullYear() + '-' +
+                        String(tomorrow.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(tomorrow.getDate()).padStart(2, '0');
+        
+        // Set the min attribute of the date input field to tomorrow's date
+        document.getElementById('date').min = minDate;
+        
+        // Get current time and format it as HH:MM
+        const timeString = now.toTimeString().split(' ')[0].substring(0, 5);
+        document.getElementById('time').value = timeString;
+
+        // Get time zone information
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        // Display current date, time, and time zone in the paragraph
+        document.getElementById('current-datetime').textContent = 
+            `Current Date: ${currentDate}, Time: ${timeString}, Time Zone: ${timeZone}`;
+    </script>
+</body>
+</html>

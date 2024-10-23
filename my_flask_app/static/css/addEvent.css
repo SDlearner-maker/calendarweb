@@ -1,0 +1,128 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #34A853;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"],
+button {
+    background-color: #34A853;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    width: 100%;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #28A745;
+}
+
+.or-divider {
+    text-align: center;
+    font-size: 18px;
+    margin: 30px 0;
+    font-weight: bold;
+    color: #888;
+}
+
+/* Box for CSV Upload */
+.csv-upload-box {
+    border: 2px solid #ddd;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.csv-upload-box h2 {
+    color: #007BFF; /* Change color for CSV heading */
+}
+
+/* Custom file upload section */
+.file-upload-wrapper {
+    border: 2px dashed #ccc;
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.file-upload-wrapper:hover {
+    border-color: #34A853;
+}
+
+.file-upload-wrapper input[type="file"] {
+    display: none;
+}
+
+.file-upload-wrapper label {
+    display: inline-block;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+}
+
+.file-upload-wrapper svg {
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 40px;
+    height: 40px;
+    fill: #666;
+}
+
+.file-upload-wrapper:hover svg {
+    fill: #34A853;
+}
+
+#current-datetime {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addEvent.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <form action="{{ url_for('events_list') }}" method="get">
+            <button type="submit">Home</button>
+        </form>
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    
+    <div class="container">
+        <h2>Add Event Manually</h2>
+        <form action="{{ url_for('add_event') }}" method="post">
+            <label for="title">Event Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required rows="4"></textarea>
+
+            <label for="receiverMail">Receiver Email:</label>
+            <input type="email" id="receiverMail" name="receiverMail" required>
+
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Event Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <input type="submit" value="Add Event">
+        </form>
+        
+        <div class="or-divider">OR</div> <!-- OR Divider -->
+
+        <div class="csv-upload-box">
+            <h2>Import Events from CSV</h2>
+            <form action="{{ url_for('import_events') }}" method="post" enctype="multipart/form-data">
+                <div class="file-upload-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 16l4-5h-3V4h-2v7H8l4 5z"/>
+                        <path d="M20 18H4v-2h16v2zm-1 3H5v-2h14v2z" fill="none"/>
+                    </svg>
+                    <label for="csv_file">Click to upload your CSV file</label>
+                    <input type="file" id="csv_file" name="csv_file" accept=".csv" required>
+                </div>
+                <p id="file-name" style="margin-top: 5px; font-weight: bold;"></p> <!-- Display the file name here -->
+                <input type="submit" value="Import Events">
+            </form>
+        </div>
+
+        <p id="current-datetime"></p>
+    </div>
+
+    <script>
+        // Get the current date and time
+        const now = new Date();
+
+        // Format date to YYYY-MM-DD using local methods
+        const currentDate = now.getFullYear() + '-' +
+                            String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                            String(now.getDate()).padStart(2, '0');
+
+        // Set the minimum date to tomorrow's date in local time
+        const tomorrow = new Date(now);       
+        tomorrow.setDate(now.getDate() + 1);
+        const minDate = tomorrow.getFullYear() + '-' +
+                        String(tomorrow.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(tomorrow.getDate()).padStart(2, '0');
+
+        // Set the min attribute of the date input field to tomorrow's date
+        document.getElementById('date').min = minDate;
+
+        // Get current time and format it as HH:MM
+        const timeString = now.toTimeString().split(' ')[0].substring(0, 5);
+        document.getElementById('time').value = timeString;
+
+        // Get time zone information
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        // Display current date, time, and time zone in the paragraph
+        document.getElementById('current-datetime').textContent = 
+            `Current Date: ${currentDate}, Time: ${timeString}, Time Zone: ${timeZone}`;
+
+        // Display the name of the uploaded CSV file
+        document.getElementById('csv_file').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
+</body>
+</html>

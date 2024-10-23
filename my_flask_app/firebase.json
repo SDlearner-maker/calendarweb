@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "my_flask_app",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "signin.html"
+      }
+    ]
+  }
+}
